@@ -55,7 +55,7 @@ bajarish uchun esa, quyidagi buyruq satrini ishga tushuramiz
 pnpm run build # yoki turbo build
 ```
 
-## CXSMXS haqida
+## CXSMXS [kosmos] haqida
 
 CXSMXS stek bu UwUssimo Robinson tomonidan yaratilgan web stack hisoblanib, UwUssimoning yillar davomida
 to'plangan tajribalarini birlashtirgan holda yaratilgan va ancha produktiv sinovlardan o'tkazish natijasida
