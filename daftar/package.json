@@ -1,6 +1,7 @@
 {
   "name": "daftar",
   "version": "0.1.0",
+  "description": "Frontend service for korrektor",
   "private": true,
   "scripts": {
     "dev": "next dev",

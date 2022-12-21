@@ -1,0 +1,12 @@
+{
+  "name": "qalam",
+  "version": "1.0.0",
+  "description": "Backend service for korrektor",
+  "private": true,
+  "scripts": {
+    "dev": "cargo run",
+    "build": "cargo build --release",
+    "start": "cargo build --release && ./target/release/qalam",
+    "lint": "cargo clippy --verbose"
+  }
+}
