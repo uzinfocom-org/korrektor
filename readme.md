@@ -46,7 +46,7 @@ pnpm install # hamma kerakli paketlarni o'rnatib olish
 pnpm run dev # demonstativ holatda platformani ishga tushurish
 ```
 
-# Qurish
+## Qurish
 
 Loyihani productionga chiqarish uchun ikki qismni qurish va kompilyatsiya qilish lozim. Ushbu protsess
 bajarish uchun esa, quyidagi buyruq satrini ishga tushuramiz
@@ -55,14 +55,16 @@ bajarish uchun esa, quyidagi buyruq satrini ishga tushuramiz
 pnpm run build # yoki turbo build
 ```
 
-# CXSMXS haqida
+## CXSMXS haqida
 
 CXSMXS stek bu UwUssimo Robinson tomonidan yaratilgan web stack hisoblanib, UwUssimoning yillar davomida
 to'plangan tajribalarini birlashtirgan holda yaratilgan va ancha produktiv sinovlardan o'tkazish natijasida
 tarqatilgan stek hisoblanadi. Ushbu stek eng zamonivy texnologiyalar o'z ichiga olib, produktivlikdan tashqari
 dasturchilar ergonomikasi haqida ham qayg'uradi. Stek yaralishidan maqsad esa, dasturchilarga qiyinchilik
-tug'dirmagan holda eng tez va produktiv web platforma va yechimlar yaratishdir. Ko'proq ma'lumotlar
-uchun: [V1](https://www.uwussi.moe/stack/cxsmxs) | [V2](https://www.uwussi.moe/stack/cxsmxs-v2.0)
+tug'dirmagan holda eng tez va produktiv web platforma va yechimlar yaratishdir.
+
+**Ko'proq ma'lumotlar
+uchun:** [V1](https://www.uwussi.moe/stack/cxsmxs) | [V2](https://www.uwussi.moe/stack/cxsmxs-v2.0)
 
 ## Litsenziya
 
