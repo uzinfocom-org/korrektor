@@ -1,73 +1,69 @@
-# Turborepo starter
+<header>
+<img src="https://raw.githubusercontent.com/uzinfocom-org/website/main/src/images/logo.svg" alt="logo" height="100" align="left">
+<h1 style="display: inline">Korrektor</h1>
 
-This is an official pnpm starter turborepo.
+CXSMXS stack da yozilgan to'liq web platofrma.
 
-## What's inside?
+[![GitHub top language](https://img.shields.io/github/languages/top/uzinfocom-org/korrektor?style=flat-square&logo=github)](https://github.com/uzinfocom-org/vicardi)
+[![Chat](https://img.shields.io/badge/Chat-grey?style=flat-square&logo=telegram)](https://t.me/korrektuz)
 
-This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
+[//]: # "[![Test CI](https://github.com/uzinfocom-org/korrektor-rs/actions/workflows/test.yml/badge.svg)](https://github.com/uzinfocom-org/korrektor-rs/actions/workflows/test.yml)"
 
-### Apps and Packages
+</header>
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+## Platforma haqida
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Ushbu platformani yozishda UwUssimo tomonidan yaratilgan CXSMXS steki ishlatildi. Dastur 2 qismdan iborat.
+Frontend va Backend. Frontend qismi Next.js freymvorkidan foydalanadi. Backend qismida esa da Rust dasturlash
+tilida yozilgan Actix freymvorki ishlaydi va bu hamma orkestrani esa yagona monorepo menejeri bo'lmish Turborepo
+chalib o'ynatadi. Ushbu loyiha esa hamma korrektordagi qulayliklarni qulay ko'rinishda foydalanuvchilarga yetkazib
+berish maqsadini bajaradi.
 
-### Utilities
+## Qulayliklar
 
-This turborepo has some additional tools already setup for you:
+- Ma'lumotlarni o'zbek alifbosi tartibida saralash
+- Tokenizatsiya. O'zbek tili imlo qoidalariga asosan so'zlarni bo'ginlarga ajratish
+- Matndagi so'zlar chastotasini hisoblash
+- Dublikatlar tozalash
+- _Yanada ko'proq imkoniyatlar keyingi relizlarda..._
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+> Bu loyiha hozir sinov bosqichidan o'tmoqda. Agarda biror xatolikka duchor
+> bo'lsangiz, xatolik haqida [xabardor](https://github.com/uzinfocom-org/korrektor/issues/new)
+> qilishni unutmang.
 
-### Build
+## O'rnatish & Ishga tushurish
 
-To build all apps and packages, run the following command:
+Ushbu loyihani ishga tushurish uchun sizda quyidagi dasturlar o'rnatilgan bo'lishi lozim:
 
-```
-cd my-turborepo
-pnpm run build
-```
+- [Node.js](https://nodejs.org/en/) & [PNPM](https://pnpm.io)
+- [Rust & Cargo](https://www.rust-lang.org/tools/install)
 
-### Develop
+O'rnatib bo'lgach esa loyiha turgan joydan terminal ochib turib, quyidagi buyruqlarni buyruq
+satrida ishga tushuramiz:
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm run dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-pnpm dlx turbo login
+```shell
+pnpm install # hamma kerakli paketlarni o'rnatib olish
+pnpm run dev # demonstativ holatda platformani ishga tushurish
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+# Qurish
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+Loyihani productionga chiqarish uchun ikki qismni qurish va kompilyatsiya qilish lozim. Ushbu protsess
+bajarish uchun esa, quyidagi buyruq satrini ishga tushuramiz
 
+```shell
+pnpm run build # yoki turbo build
 ```
-pnpm dlx turbo link
-```
 
-## Useful Links
+# CXSMXS haqida
 
-Learn more about the power of Turborepo:
+CXSMXS stek bu UwUssimo Robinson tomonidan yaratilgan web stack hisoblanib, UwUssimoning yillar davomida
+to'plangan tajribalarini birlashtirgan holda yaratilgan va ancha produktiv sinovlardan o'tkazish natijasida
+tarqatilgan stek hisoblanadi. Ushbu stek eng zamonivy texnologiyalar o'z ichiga olib, produktivlikdan tashqari
+dasturchilar ergonomikasi haqida ham qayg'uradi. Stek yaralishidan maqsad esa, dasturchilarga qiyinchilik
+tug'dirmagan holda eng tez va produktiv web platforma va yechimlar yaratishdir. Ko'proq ma'lumotlar
+uchun: [V1](https://www.uwussi.moe/stack/cxsmxs) | [V2](https://www.uwussi.moe/stack/cxsmxs-v2.0)
 
-- [Pipelines](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## Litsenziya
+
+Ushbu kutubxona AGPL-3.0 litsenziyasi ostida tarqatiladi. Batafsil ma'lumot uchun [LICENSE](./LICENSE) fayllarini ko'zdan kechiring!

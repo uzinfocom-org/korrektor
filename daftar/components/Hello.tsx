@@ -1,12 +1,11 @@
-import useSWR from 'swr'
+import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 
-
 export default function Hello() {
-  const { data, error } = useSWR(`/api/hello`, fetcher)
+  const { data, error } = useSWR(`/api/hello`, fetcher);
 
-  if (error) return <>Failed to load data from backend</>
-  if (!data) return <>Loading...</>
+  if (error) return <>Failed to load data from backend</>;
+  if (!data) return <>Loading...</>;
 
-  return <>{data.message}</>
+  return <>{data.message}</>;
 }

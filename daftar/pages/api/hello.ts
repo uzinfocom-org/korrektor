@@ -1,15 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  message: string
-}
+  message: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const address = process.env.BACKEND || 'http://localhost:3001'
-  const data = await fetch(address + "/")
-  res.status(200).json({ message: await data.text() })
+  const address = process.env.BACKEND || "http://localhost:3001";
+  const data = await fetch(address + "/");
+  res.status(200).json({ message: await data.text() });
 }
