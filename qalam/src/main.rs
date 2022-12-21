@@ -2,7 +2,7 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 
 #[get("/")]
 async fn hello() -> impl Responder {
-    HttpResponse::Ok().json( "{ \"message\": \"Hello World!\" }")
+    HttpResponse::Ok().body( "Hello from the backend!")
 }
 
 #[actix_web::main]

@@ -2,13 +2,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
-  name: string
+  message: string
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-
-  res.status(200).json({ name: 'John Doe' })
+  const address = process.env.BACKEND || 'http://localhost:3001'
+  const data = await fetch(address + "/")
+  res.status(200).json({ message: await data.text() })
 }

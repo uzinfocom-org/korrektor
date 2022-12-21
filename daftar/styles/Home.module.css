@@ -113,8 +113,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
   padding: 25px 10px;
   margin-left: 16px;
   transform: translateZ(0);
