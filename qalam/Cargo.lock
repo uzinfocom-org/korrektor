@@ -669,9 +669,9 @@ dependencies = [
 
 [[package]]
 name = "korrektor"
-version = "0.1.1"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa4d71e42c91fa49469e77f58d143fabf6e80b1da4f2e546d974ec56221e2850"
+checksum = "1c6d85c11ecd83127b870dddfd043c021f34db3f719d2c28ebf48c36bbd5dba5"
 dependencies = [
  "itertools",
  "pcre",
@@ -891,14 +891,17 @@ dependencies = [
  "dotenv",
  "env_logger",
  "peak_alloc",
- "serde_json",
+ "qalam-view",
 ]
 
 [[package]]
 name = "qalam-view"
 version = "0.1.0"
 dependencies = [
+ "actix-web",
  "korrektor",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -1012,6 +1015,20 @@ name = "serde"
 version = "1.0.152"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bb7d1f0d3021d347a83e556fc4683dea2ea09d87bccdf88ff5c12545d89d5efb"
+dependencies = [
+ "serde_derive",
+]
+
+[[package]]
+name = "serde_derive"
+version = "1.0.152"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "af487d118eecd09402d70a5d72551860e788df87b464af30e5ea6a38c75c541e"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "serde_json"
