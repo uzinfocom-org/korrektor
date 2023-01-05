@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "command",
+            "name": "Run turborepo",
+            "program": "pnpm",
+        },
+
+    ]
+}

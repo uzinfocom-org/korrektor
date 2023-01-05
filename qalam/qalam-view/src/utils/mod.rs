@@ -1,10 +1,9 @@
-use actix_web::{web, Scope};
+use actix_web::{get, HttpResponse};
 
-mod duplicate;
-mod frequency;
+pub mod duplicate;
+pub mod frequency;
 
-pub fn scope() -> Scope {
-    web::scope("/tools")
-        .service(duplicate::sort)
-        .service(frequency::sort)
+#[get("/")]
+pub async fn index() -> HttpResponse {
+    HttpResponse::Ok().body("Available tools: duplicate, frequency")
 }

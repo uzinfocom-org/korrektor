@@ -1,6 +1,11 @@
 use actix_web::{get, web, HttpResponse};
 
-#[get("/dup/{content}")]
-pub async fn sort(path: web::Path<(u32,)>) -> HttpResponse {
-    HttpResponse::Ok().body(format!("User detail: {}", path.into_inner().0))
+#[get("/duplicate")]
+pub async fn main() -> HttpResponse {
+    HttpResponse::Ok().body("Duplicates module")
+}
+
+#[get("/duplicate/{content}")]
+pub async fn content(path: web::Path<String>) -> HttpResponse {
+    HttpResponse::Ok().body(format!("User detail: {}", path.into_inner()))
 }

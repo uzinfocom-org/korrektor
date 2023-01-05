@@ -1,6 +1,6 @@
 use actix_web::{get, web, HttpResponse};
 
-#[get("/show/{id}")]
-pub async fn sort(path: web::Path<(u32,)>) -> HttpResponse {
-    HttpResponse::Ok().body(format!("User detail: {}", path.into_inner().0))
+#[get("/alphabetic/{content}")]
+pub async fn main(path: web::Path<String>) -> HttpResponse {
+    HttpResponse::Ok().body(format!("User detail: {}", path.into_inner()))
 }

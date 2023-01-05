@@ -1,0 +1,9 @@
+{
+    "configurations": [
+        {
+            "type": "cargo",
+            "name": "Run",
+            "cargoArgs": ["run", "--bin", "qalam-http"],
+        },
+    ]
+}
