@@ -1,0 +1,24 @@
+name: Test [Backend]
+
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./qalam
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: cargo build --release --verbose
+
+      - name: Run lint
+        run: cargo clippy --verbose
+
+#      - name: Run tests
+#        run: cargo test --verbose
