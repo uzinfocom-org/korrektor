@@ -10,7 +10,7 @@ pub async fn main() -> HttpResponse {
 #[get("/tokenize/{content}")]
 pub async fn content(path: web::Path<String>) -> HttpResponse {
     let content = path.into_inner();
-    let process = tokenize::split_word(content.clone().as_str());
+    let process = tokenize::split_word(content.as_str());
 
     HttpResponse::Ok().json(json!({
         "message": "tools/tokenize",

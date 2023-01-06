@@ -11,7 +11,7 @@ pub async fn main() -> HttpResponse {
 pub async fn content(path: web::Path<String>) -> HttpResponse {
     let content = path.into_inner();
 
-    let process = duplicates::remove(content.clone().as_str());
+    let process = duplicates::remove(content.as_str());
 
     HttpResponse::Ok().json(json!({
         "message": "utils/duplicate",

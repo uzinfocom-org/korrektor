@@ -10,7 +10,7 @@ pub async fn main() -> HttpResponse {
 #[get("/frequency/{content}")]
 pub async fn content(path: web::Path<String>) -> HttpResponse {
     let content = path.into_inner();
-    let process = frequency::count(content.clone().as_str());
+    let process = frequency::count(content.as_str());
 
     HttpResponse::Ok().json(json!({
         "message": "utils/frequency",
