@@ -9,7 +9,7 @@ pub mod tools;
 pub mod utils;
 
 #[get("/")]
-async fn index() -> impl Responder {
+pub async fn index() -> impl Responder {
     HttpResponse::Ok().json(json!(
             {
                 "message": "welcome to korrektor's backend, check the api health /status"
@@ -18,7 +18,7 @@ async fn index() -> impl Responder {
 }
 
 #[get("/favicon.ico")]
-async fn favicon() -> Result<fs::NamedFile, Error> {
+pub async fn favicon() -> Result<fs::NamedFile, Error> {
     let path: std::path::PathBuf = "./favicon.ico".parse().unwrap();
     let file = fs::NamedFile::open(path)?;
     Ok(file

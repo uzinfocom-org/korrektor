@@ -9,7 +9,7 @@ pub struct Status {
 }
 
 #[get("/status")]
-async fn index(status: web::Data<Status>) -> impl Responder {
+pub async fn index(status: web::Data<Status>) -> impl Responder {
     let data = status.as_ref();
 
     HttpResponse::Ok().json(json!({

@@ -38,10 +38,17 @@ async fn main() -> std::io::Result<()> {
             .service(stats::index)
             .service(
                 web::scope("/tools")
+                    // Main content
                     .service(tools::index)
+                    // Number to word
                     .service(tools::number::main)
+                    .service(tools::number::content)
+                    // Tokenizer
                     .service(tools::tokenize::main)
-                    .service(tools::alphabetic::main),
+                    .service(tools::tokenize::content)
+                    // Alphabetical ordering
+                    .service(tools::alphabetic::main)
+                    .service(tools::alphabetic::content),
             )
             .service(
                 web::scope("/utils")

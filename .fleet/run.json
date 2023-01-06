@@ -2,9 +2,21 @@
     "configurations": [
         {
             "type": "command",
-            "name": "Run turborepo",
+            "name": "Run All",
             "program": "pnpm",
+            "args": ["dev"],
         },
-
+        {
+            "type": "command",
+            "name": "Run Frontend",
+            "program": "pnpm",
+            "args": ["dev"],
+        },
+        {
+            "type": "command",
+            "name": "Run Backend",
+            "program": "pnpm",
+            "args": ["dev"],
+        },
     ]
 }
