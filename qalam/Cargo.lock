@@ -930,7 +930,7 @@ version = "0.1.0"
 
 [[package]]
 name = "qalam-http"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "actix-web",
  "dotenv",
@@ -942,7 +942,7 @@ dependencies = [
 
 [[package]]
 name = "qalam-view"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "actix-files",
  "actix-web",
