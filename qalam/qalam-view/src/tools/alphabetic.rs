@@ -1,4 +1,6 @@
+use crate::auth::middleware;
 use actix_web::{get, web, HttpResponse};
+use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::alphabetic;
 use serde_json::json;
 
@@ -8,13 +10,16 @@ pub async fn main() -> HttpResponse {
 }
 
 #[get("/alphabetic/{content}")]
-pub async fn content(path: web::Path<String>) -> HttpResponse {
+pub async fn content(path: web::Path<String>, auth: BearerAuth) -> HttpResponse {
     let content = path.into_inner();
     let process = alphabetic::sort(content.as_str());
 
-    HttpResponse::Ok().json(json!({
-        "message": "tools/alphabetic",
-        "query": content,
-        "content": process
-    }))
+    middleware(
+        HttpResponse::Ok().json(json!({
+            "message": "tools/alphabetic",
+            "query": content,
+            "content": process
+        })),
+        auth,
+    )
 }

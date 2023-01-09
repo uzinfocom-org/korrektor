@@ -1,4 +1,6 @@
+use crate::auth::middleware;
 use actix_web::{get, web, HttpResponse};
+use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::number;
 use serde_json::json;
 
@@ -8,13 +10,16 @@ pub async fn main() -> HttpResponse {
 }
 
 #[get("/number/{content}")]
-pub async fn content(path: web::Path<i64>) -> HttpResponse {
+pub async fn content(path: web::Path<i64>, auth: BearerAuth) -> HttpResponse {
     let content = path.into_inner();
     let process = number::integer_to_word(content);
 
-    HttpResponse::Ok().json(json!({
-        "message": "tools/number",
-        "query": content,
-        "content": process
-    }))
+    middleware(
+        HttpResponse::Ok().json(json!({
+            "message": "tools/number",
+            "query": content,
+            "content": process
+        })),
+        auth,
+    )
 }

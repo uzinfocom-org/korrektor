@@ -1,10 +1,11 @@
 use actix_web::middleware::TrailingSlash;
 use actix_web::{middleware, web, App, HttpServer};
+use actix_web_httpauth::extractors::bearer::{self};
 use peak_alloc::PeakAlloc;
 use qalam_view::stats::Status;
 use qalam_view::{error, index, stats, tools, utils};
 
-mod init;
+pub mod init;
 
 #[global_allocator]
 static PEAK_ALLOC: PeakAlloc = PeakAlloc;
@@ -24,7 +25,7 @@ async fn main() -> std::io::Result<()> {
     // Logging the outlet of the server
     let configs: (String, u16) = init::target();
     println!(
-        "ready - started server on {address}:{port}, url: http://{address}:{port}",
+        "ready - started server on {address}:{port}, url: https://{address}:{port}",
         address = configs.0,
         port = configs.1
     );
@@ -35,6 +36,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Logger::default())
             .wrap(middleware::NormalizePath::new(TrailingSlash::Trim))
             .app_data(web::Data::new(status.clone()))
+            .app_data(bearer::Config::default().realm("Restricted area: Dungeon Masters only"))
             .service(index)
             .service(stats::index)
             .service(
