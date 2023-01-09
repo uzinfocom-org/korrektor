@@ -7,8 +7,11 @@ pub fn middleware(req: HttpResponse, token: BearerAuth) -> HttpResponse {
         println!("TOKEN: {}", token.token());
         req
     } else {
-        HttpResponse::Unauthorized().json(json!({
-            "message": "Bruh..."
-        }))
+        HttpResponse::Unauthorized().body(
+            serde_json::to_string(&json!({
+                "message": "Bruh..."
+            }))
+            .unwrap(),
+        )
     }
 }

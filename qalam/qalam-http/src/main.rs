@@ -3,7 +3,7 @@ use actix_web::{middleware, web, App, HttpServer};
 use actix_web_httpauth::extractors::bearer::{self};
 use peak_alloc::PeakAlloc;
 use qalam_view::stats::Status;
-use qalam_view::{error, index, stats, tools, utils};
+use qalam_view::{error, favicon, index, stats, tools, utils};
 
 pub mod init;
 
@@ -38,6 +38,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::Data::new(status.clone()))
             .app_data(bearer::Config::default().realm("Restricted area: Dungeon Masters only"))
             .service(index)
+            .service(favicon)
             .service(stats::index)
             .service(
                 web::scope("/tools")
