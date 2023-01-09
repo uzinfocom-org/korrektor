@@ -1,4 +1,5 @@
 use actix_web::{middleware, web, App, HttpServer};
+use actix_web::middleware::TrailingSlash;
 use peak_alloc::PeakAlloc;
 use qalam_view::stats::Status;
 use qalam_view::{error, index, stats, tools, utils};
@@ -32,7 +33,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(middleware::Logger::default())
-            .wrap(middleware::NormalizePath::default())
+            .wrap(middleware::NormalizePath::new(TrailingSlash::Trim))
             .app_data(web::Data::new(status.clone()))
             .service(index)
             .service(stats::index)
