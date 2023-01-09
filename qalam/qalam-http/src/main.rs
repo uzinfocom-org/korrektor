@@ -1,5 +1,5 @@
-use actix_web::{middleware, web, App, HttpServer};
 use actix_web::middleware::TrailingSlash;
+use actix_web::{middleware, web, App, HttpServer};
 use peak_alloc::PeakAlloc;
 use qalam_view::stats::Status;
 use qalam_view::{error, index, stats, tools, utils};
