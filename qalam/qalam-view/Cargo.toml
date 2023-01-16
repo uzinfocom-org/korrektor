@@ -13,3 +13,4 @@ peak_alloc = "0.1.0"
 actix-files = "0.6.1"
 actix-web-httpauth = "0.8.0"
 serde = { version = "1.0", features = ["derive"] }
+korrektor-private = { path = "../../modules/korrektor-rs-private" }
