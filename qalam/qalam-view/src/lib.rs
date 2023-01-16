@@ -8,6 +8,7 @@ pub mod error;
 pub mod stats;
 pub mod tools;
 pub mod utils;
+pub mod private;
 
 #[get("/")]
 pub async fn index() -> impl Responder {
