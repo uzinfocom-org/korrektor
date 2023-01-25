@@ -732,8 +732,10 @@ dependencies = [
 [[package]]
 name = "ispell"
 version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1cbac553db0de22941d218bc20d2e121c960e6226f7a1b66ea195958db05f2da"
+source = "git+https://github.com/uzinfocom-org/rust-ispell?branch=master#03df22ec58dee17eaaab26270a18633618ca2aa0"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "itertools"
