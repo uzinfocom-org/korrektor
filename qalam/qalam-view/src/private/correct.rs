@@ -19,26 +19,26 @@ pub async fn content(path: web::Path<(String, String)>) -> HttpResponse {
     }))
 }
 
-#[get("/correct/modifiers/{content}")]
+#[get("/correct/modifiers/{text_content}")]
 pub async fn modifiers(path: web::Path<String>) -> HttpResponse {
-    let content = path.into_inner();
-    let process = korrektor_rs_private::corrector::remove_modifiers(&content);
+    let text_content = path.into_inner();
+    let process = korrektor_rs_private::corrector::remove_modifiers(&text_content);
 
     HttpResponse::Ok().json(json!({
         "message": "private/correct",
-        "query": content,
+        "query": text_content,
         "content": process
     }))
 }
 
-#[get("/correct/syntax/{content}")]
+#[get("/correct/syntax/{text_content}")]
 pub async fn syntax(path: web::Path<String>) -> HttpResponse {
-    let content = path.into_inner();
-    let process = korrektor_rs_private::corrector::correct(&content);
+    let text_content = path.into_inner();
+    let process = korrektor_rs_private::corrector::correct(&text_content);
 
     HttpResponse::Ok().json(json!({
         "message": "private/correct",
-        "query": content,
+        "query": text_content,
         "content": process
     }))
 }
