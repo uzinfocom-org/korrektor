@@ -3,7 +3,7 @@ use actix_web::{middleware, web, App, HttpServer};
 use actix_web_httpauth::extractors::bearer::{self};
 use peak_alloc::PeakAlloc;
 use qalam_view::stats::Status;
-use qalam_view::{error, favicon, index, stats, tools, utils};
+use qalam_view::{error, favicon, index, private, stats, tools, utils};
 
 pub mod init;
 
@@ -40,6 +40,19 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .service(favicon)
             .service(stats::index)
+            .service(
+                web::scope("/private")
+                    // Main content
+                    .service(private::index)
+                    // Correct
+                    .service(private::correct::main)
+                    .service(private::correct::content)
+                    .service(private::correct::modifiers)
+                    .service(private::correct::syntax)
+                    // Transliterate
+                    .service(private::transliterate::main)
+                    .service(private::transliterate::content)
+            )
             .service(
                 web::scope("/tools")
                     // Main content
