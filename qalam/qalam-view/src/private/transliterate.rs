@@ -4,7 +4,6 @@ use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor_rs_private;
 use serde_json::json;
 
-
 #[get("/transliterate")]
 pub async fn main() -> HttpResponse {
     HttpResponse::Ok().body("Transliteration module")
@@ -17,10 +16,10 @@ pub async fn content(path: web::Path<(String, String)>, auth: BearerAuth) -> Htt
 
     middleware(
         HttpResponse::Ok().json(json!({
-        "message": "private/transliterate",
-        "query": content,
-        "content": process
-    })),
+            "message": "private/transliterate",
+            "query": content,
+            "content": process
+        })),
         auth,
     )
 }

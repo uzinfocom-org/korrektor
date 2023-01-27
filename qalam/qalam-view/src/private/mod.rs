@@ -1,7 +1,7 @@
 use actix_web::{get, HttpResponse};
 
-pub mod transliterate;
 pub mod correct;
+pub mod transliterate;
 
 #[get("/")]
 pub async fn index() -> HttpResponse {

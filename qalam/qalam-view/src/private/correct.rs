@@ -16,10 +16,10 @@ pub async fn content(path: web::Path<(String, String)>, auth: BearerAuth) -> Htt
 
     middleware(
         HttpResponse::Ok().json(json!({
-        "message": "private/correct/content",
-        "query": content,
-        "content": process
-    })),
+            "message": "private/correct/content",
+            "query": content,
+            "content": process
+        })),
         auth,
     )
 }
@@ -31,10 +31,10 @@ pub async fn modifiers(path: web::Path<String>, auth: BearerAuth) -> HttpRespons
 
     middleware(
         HttpResponse::Ok().json(json!({
-        "message": "private/correct/modifiers",
-        "query": text_content,
-        "content": process
-    })),
+            "message": "private/correct/modifiers",
+            "query": text_content,
+            "content": process
+        })),
         auth,
     )
 }
@@ -46,10 +46,10 @@ pub async fn syntax(path: web::Path<String>, auth: BearerAuth) -> HttpResponse {
 
     middleware(
         HttpResponse::Ok().json(json!({
-        "message": "private/correct/syntax",
-        "query": text_content,
-        "content": process
-    })),
+            "message": "private/correct/syntax",
+            "query": text_content,
+            "content": process
+        })),
         auth,
     )
 }

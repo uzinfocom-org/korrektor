@@ -5,10 +5,10 @@ use serde_json::json;
 
 pub mod auth;
 pub mod error;
+pub mod private;
 pub mod stats;
 pub mod tools;
 pub mod utils;
-pub mod private;
 
 #[get("/")]
 pub async fn index() -> impl Responder {
