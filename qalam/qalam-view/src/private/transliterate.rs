@@ -23,3 +23,45 @@ pub async fn content(path: web::Path<(String, String)>, auth: BearerAuth) -> Htt
         auth,
     )
 }
+
+#[cfg(test)]
+mod tests {
+    use korrektor_rs_private::{corrector, transliterator};
+    use super::*;
+
+    #[actix_web::test]
+    async fn content_lat_test() {
+        let text_content = "ғозал ҒОЗАЛ Ғозал гелий";
+        let process = transliterator::to(text_content.to_string(), "lat");
+
+        let response = json!({
+        "message": "private/correct/transliterate",
+        "query": text_content,
+        "content": process
+    });
+
+
+        let static_json =
+            "{\"content\":\"g‘ozal GʼOZAL Gʼozal geliy\",\"message\":\"private/correct/transliterate\",\"query\":\"ғозал ҒОЗАЛ Ғозал гелий\"}";
+
+        assert_eq!(serde_json::to_string(&response).unwrap(), static_json);
+    }
+
+    #[actix_web::test]
+    async fn content_cyr_test() {
+        let text_content = "g'ozal G'OZAL G'ozal geliy";
+        let process = transliterator::to(text_content.to_string(), "cyr");
+
+        let response = json!({
+        "message": "private/correct/transliterate",
+        "query": text_content,
+        "content": process
+    });
+
+
+        let static_json =
+            "{\"content\":\"ғозал ҒОЗАЛ Ғозал гелий\",\"message\":\"private/correct/transliterate\",\"query\":\"g'ozal G'OZAL G'ozal geliy\"}";
+
+        assert_eq!(serde_json::to_string(&response).unwrap(), static_json);
+    }
+}
