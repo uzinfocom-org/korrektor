@@ -22,10 +22,7 @@ pub async fn content(path: web::Path<String>) -> HttpResponse {
 
 #[cfg(test)]
 mod tests {
-    use std::os::macos::raw::stat;
     use super::*;
-    use actix_web::body::MessageBody;
-    use actix_web::http;
 
     #[actix_web::test]
     async fn test_index_ok() {
