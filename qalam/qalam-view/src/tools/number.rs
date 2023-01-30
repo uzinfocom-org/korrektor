@@ -23,3 +23,26 @@ pub async fn content(path: web::Path<i64>, auth: BearerAuth) -> HttpResponse {
         auth,
     )
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[actix_web::test]
+    async fn test_index_ok() {
+        let text_content = 12;
+        let process = number::integer_to_word(text_content);
+
+        let response = json!({
+        "message": "tools/number",
+        "query": text_content,
+        "content": process
+    });
+
+
+        let static_json =
+            "{\"content\":\"o‘n ikki\",\"message\":\"tools/number\",\"query\":12}";
+
+        assert_eq!(serde_json::to_string(&response).unwrap(), static_json);
+    }
+}

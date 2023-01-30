@@ -23,3 +23,26 @@ pub async fn content(path: web::Path<String>, auth: BearerAuth) -> HttpResponse 
         auth,
     )
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[actix_web::test]
+    async fn test_index_ok() {
+        let text_content = "G‘ozal estafeta chilonzor o'zbek chiroyli";
+        let process = alphabetic::sort(text_content);
+
+        let response = json!({
+        "message": "tools/alphabetic",
+        "query": text_content,
+        "content": process
+    });
+
+
+        let static_json =
+            "{\"content\":\"estafeta\\no‘zbek\\nchilonzor\\nchiroyli\\nG‘ozal\\n\",\"message\":\"tools/alphabetic\",\"query\":\"G‘ozal estafeta chilonzor o'zbek chiroyli\"}";
+
+        assert_eq!(serde_json::to_string(&response).unwrap(), static_json);
+    }
+}
