@@ -18,3 +18,25 @@ pub async fn content(path: web::Path<String>) -> HttpResponse {
         "content": process
     }))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[actix_web::test]
+    async fn test_index_ok() {
+        let text_content = "hello sam hello";
+        let process = frequency::count(text_content);
+
+        let response = json!({
+        "message": "utils/duplicate",
+        "query": text_content,
+        "content": process
+    });
+
+        let static_json =
+            "{\"content\":{\"hello\":2,\"sam\":1},\"message\":\"utils/duplicate\",\"query\":\"hello sam hello\"}";
+
+        assert_eq!(serde_json::to_string(&response).unwrap(), static_json);
+    }
+}
