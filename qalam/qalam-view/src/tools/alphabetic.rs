@@ -41,7 +41,7 @@ mod tests {
 
 
         let static_json =
-            "{\"content\":\"estafeta\\no‘zbek\\nchilonzor\\nchiroyli\\nG‘ozal\\n\",\"message\":\"tools/alphabetic\",\"query\":\"G‘ozal estafeta chilonzor o'zbek chiroyli\"}";
+            "{\"content\":\"estafeta o‘zbek chilonzor chiroyli G‘ozal\",\"message\":\"tools/alphabetic\",\"query\":\"G‘ozal estafeta chilonzor o'zbek chiroyli\"}";
 
         assert_eq!(serde_json::to_string(&response).unwrap(), static_json);
     }
