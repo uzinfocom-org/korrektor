@@ -29,7 +29,7 @@ mod tests {
     use super::*;
 
     #[actix_web::test]
-    async fn test_index_ok() {
+    async fn content_test() {
         let text_content = 12;
         let process = number::integer_to_word(text_content);
 

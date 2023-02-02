@@ -25,7 +25,7 @@ mod tests {
     use super::*;
 
     #[actix_web::test]
-    async fn test_index_ok() {
+    async fn content_test() {
         let text_content = "hello sam hello";
         let process = duplicates::remove(text_content);
 

@@ -29,7 +29,7 @@ mod tests {
     use super::*;
 
     #[actix_web::test]
-    async fn test_index_ok() {
+    async fn content_test() {
         let text_content = "G‘ozal estafeta chilonzor o'zbek chiroyli";
         let process = alphabetic::sort(text_content);
 
