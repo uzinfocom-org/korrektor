@@ -1,6 +1,11 @@
 {
   "name": "korrektor",
   "version": "0.0.0",
+  "detailed": {
+    "en": "Korrektor.uz - Linguistics of the new generation",
+    "ru": "Korrektor.uz - Лингвистика нового поколения ",
+    "uz": "Korrektor.uz - Yangi avlod lingvistikasi"
+  },
   "private": true,
   "workspaces": [
     "apps/*",
