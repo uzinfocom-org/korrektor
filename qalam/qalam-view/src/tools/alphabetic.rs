@@ -1,5 +1,5 @@
 use crate::auth::middleware;
-use actix_web::{get, web, HttpResponse};
+use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::alphabetic;
 use serde_json::json;
@@ -9,9 +9,17 @@ pub async fn main() -> HttpResponse {
     HttpResponse::Ok().body("Alphabetic ordering module")
 }
 
-#[get("/alphabetic/{content}")]
-pub async fn content(path: web::Path<String>, auth: BearerAuth) -> HttpResponse {
-    let content = path.into_inner();
+#[post("/alphabetic")]
+pub async fn content(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
+    let content = match String::from_utf8(path.to_vec()) {
+        Ok(string) => string,
+        Err(_) => {
+            return HttpResponse::BadRequest().json(json!({
+                "message": "tools/alphabetic",
+                "content": "Invalid input in body: should be text with valid characters."}));
+        }
+    };
+
     let process = alphabetic::sort(content.as_str());
 
     middleware(
