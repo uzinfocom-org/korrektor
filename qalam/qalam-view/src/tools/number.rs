@@ -1,5 +1,5 @@
 use crate::auth::middleware;
-use actix_web::{get, web, HttpResponse};
+use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::number;
 use serde_json::json;
@@ -9,9 +9,26 @@ pub async fn main() -> HttpResponse {
     HttpResponse::Ok().body("Number module")
 }
 
-#[get("/number/{content}")]
-pub async fn content(path: web::Path<i64>, auth: BearerAuth) -> HttpResponse {
-    let content = path.into_inner();
+#[post("/number")]
+pub async fn content(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
+    let content = match String::from_utf8(path.to_vec()) {
+        Ok(string) => string,
+        Err(_) => {
+            return HttpResponse::BadRequest().json(json!({
+                "message": "tools/number",
+                "content": "Invalid input in body: should be text with valid characters."}));
+        }
+    };
+
+    let content: i64 = match content.trim().parse() {
+        Ok(num) => num,
+        Err(_) => {
+            return HttpResponse::BadRequest().json(json!({
+                "message": "tools/number",
+                "content": "Invalid input in body: can not convert input into integer."}));
+        }
+    };
+
     let process = number::integer_to_word(content);
 
     middleware(
