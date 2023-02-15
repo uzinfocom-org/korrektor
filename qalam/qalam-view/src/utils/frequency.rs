@@ -1,4 +1,4 @@
-use actix_web::{get, web, HttpResponse};
+use actix_web::{get, post, web, HttpResponse};
 use korrektor::utils::frequency;
 use serde_json::json;
 
@@ -7,9 +7,17 @@ pub async fn main() -> HttpResponse {
     HttpResponse::Ok().body("Frequency module")
 }
 
-#[get("/frequency/{content}")]
-pub async fn content(path: web::Path<String>) -> HttpResponse {
-    let content = path.into_inner();
+#[post("/frequency")]
+pub async fn content(path: web::Bytes) -> HttpResponse {
+    let content = match String::from_utf8(path.to_vec()) {
+        Ok(string) => string,
+        Err(_) => {
+            return HttpResponse::BadRequest().json(json!({
+                "message": "utils/frequency",
+                "content": "Invalid input in body: should be text with valid characters."}));
+        }
+    };
+
     let process = frequency::count(content.as_str());
 
     HttpResponse::Ok().json(json!({
