@@ -9,7 +9,7 @@ pub async fn main() -> HttpResponse {
     HttpResponse::Ok().body("Correction module")
 }
 
-#[post("/correct/{lang}")]
+#[post("/correct/content/{lang}")]
 pub async fn content(path: web::Path<String>, content: web::Bytes, auth: BearerAuth) -> HttpResponse {
     let language= path.into_inner();
 
