@@ -17,7 +17,7 @@ pub async fn content(path: web::Path<String>, content: web::Bytes, auth: BearerA
         Ok(string) => string,
         Err(_) => {
             return HttpResponse::BadRequest().json(json!({
-                "message": "private/correct",
+                "message": "private/correct/content",
                 "content": "Invalid input in body: should be text with valid characters."}));
         }
     };
@@ -26,7 +26,7 @@ pub async fn content(path: web::Path<String>, content: web::Bytes, auth: BearerA
 
     middleware(
         HttpResponse::Ok().json(json!({
-            "message": "private/correct",
+            "message": "private/correct/content",
             "query": content,
             "content": process
         })),
@@ -91,7 +91,7 @@ mod tests {
         let process_lat = corrector::get_correction_suggestions(text_content_lat, "lat");
 
         let response = json!({
-        "message": "private/correct",
+        "message": "private/correct/content",
         "query": text_content_lat,
         "content": process_lat
     });
@@ -111,7 +111,7 @@ mod tests {
 
 
         let static_json =
-            "{\"content\":[".to_string() + &serde_json::to_string(&errors_lat).unwrap() + "],\"message\":\"private/correct\",\"query\":\"chroyli\"}";
+            "{\"content\":[".to_string() + &serde_json::to_string(&errors_lat).unwrap() + "],\"message\":\"private/correct/content\",\"query\":\"chroyli\"}";
 
         assert_eq!(&serde_json::to_string(&response).unwrap(), &static_json);
     }
@@ -122,7 +122,7 @@ mod tests {
         let process_cyr = corrector::get_correction_suggestions(text_content_cyr, "cyr");
 
         let response = json!({
-        "message": "private/correct",
+        "message": "private/correct/content",
         "query": text_content_cyr,
         "content": process_cyr
     });
@@ -141,7 +141,7 @@ mod tests {
             });
 
         let static_json =
-            "{\"content\":[".to_string() + &serde_json::to_string(&errors_cyr).unwrap() + "],\"message\":\"private/correct\",\"query\":\"чройли\"}";
+            "{\"content\":[".to_string() + &serde_json::to_string(&errors_cyr).unwrap() + "],\"message\":\"private/correct/content\",\"query\":\"чройли\"}";
 
         assert_eq!(&serde_json::to_string(&response).unwrap(), &static_json);
     }
