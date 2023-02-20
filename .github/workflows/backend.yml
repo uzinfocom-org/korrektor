@@ -21,7 +21,7 @@ jobs:
         run: |
             cargo build --release --verbose
             # Tell the size of binary
-            pwd && ls -la . # du -s 
+            du -s ./target/release/qalam-cli
 
       - name: Run lint
         run: cargo clippy --verbose
