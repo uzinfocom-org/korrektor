@@ -29,8 +29,8 @@ enum Commands {
     /// Starting the rest server
     Server,
     
-    // /// Install and unzip latest hunspell dictionary
-    // Data,
+    /// Install and unzip latest hunspell dictionary
+    Data,
 }
 
 #[actix_web::main]
@@ -87,7 +87,10 @@ async fn main() {
             let help = skin::wrapper();
             help.print_inline(TUTORIAL);
         }
-        
-        
+        Commands::Data => {
+            data::bootstrap().await;
+            
+            println!("Still WIP");
+        }
     }
 }

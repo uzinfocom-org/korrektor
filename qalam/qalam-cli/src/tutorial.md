@@ -5,7 +5,7 @@ Make sure you have following installed on your machine:
 - pcre
 - ispell
 - aspell
-- hunspell 
+- hunspell
 
 **Debian, Ubuntu**
 
