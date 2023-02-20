@@ -21,7 +21,7 @@ jobs:
         run: |
             cargo build --release --verbose
             # Tell the size of binary
-            pwd # du -s 
+            pwd && ls -la . # du -s 
 
       - name: Run lint
         run: cargo clippy --verbose
