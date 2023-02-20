@@ -1,80 +1,43 @@
-use std::fs::File;
-use std::io::Write;
-use serde::{Deserialize, Serialize};
+use crate::statics::{UZ_CYR_AFF, UZ_CYR_DIC, UZ_LAT_AFF, UZ_LAT_DIC};
+use std::path::Path;
 
-static APP_USER_AGENT: &str =
-  concat!("QALAM", "/", env!("CARGO_PKG_VERSION"),);
+#[cfg(target_os = "linux")]
+const LOCATION: &str = "/usr/share/hunspell";
 
-static DOWNLOAD_LOCATION: &str =
-  "https://api.github.com/repos/uzinfocom-org/korrektor-dict/releases/latest";
+#[cfg(target_os = "macos")]
+const LOCATION: &str = "~/Library/Spelling";
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct Asset {
-  name: String,
-  browser_download_url: String,
-}
+#[cfg(target_os = "windows")]
+const LOCATION: &str = "/usr/share/hunspell";
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct GitHub {
-  id: u32,
-  tag_name: String,
-  assets: Vec<Asset>,
-}
+pub fn bootstrap() {
+    let files: Vec<(&str, &str)> = vec![
+        ("uz-cyr.aff", UZ_CYR_AFF),
+        ("uz-lat.aff", UZ_LAT_AFF),
+        ("uz-cyr.dic", UZ_CYR_DIC),
+        ("uz-lat.dic", UZ_LAT_DIC),
+    ];
 
-async fn download_link(link: &str) -> GitHub {
-  // Get info about latest builds
-  let client = reqwest::Client::builder()
-    .user_agent(APP_USER_AGENT)
-    .build()
-    .expect("Couldn't build the client");
+    if !Path::new("./dictionary").exists() {
+        std::fs::create_dir("dictionary").expect("Couldn't create dictionary directory");
+    } else {
+        println!("Seems like dictionary directory already exists");
+    }
 
-  let target: GitHub = client
-    .get(link)
-    .send()
-    .await
-    .expect("Problems with Internet connectivity!")
-    .json()
-    .await
-    .expect("Can't convert source into json!");
-  
-  target
-}
+    for file in files {
+        let link = format!("./dictionary/{}", file.0);
+        let path = Path::new(link.as_str());
 
-async fn download(location: String) -> File {
-  let mut dumpfile = tempfile::tempfile().unwrap();
-  
-  // let resp = reqwest::get(file.browser_download_url.to_string())
-  
-  let resp = reqwest::get(location)
-    .await
-    .expect("Problems with Internet connectivity!")
-    .bytes()
-    .await
-    .expect("Can't convert source into bytes!");
-  
-  std::io::copy(&mut resp.as_ref(), &mut dumpfile)
-    .expect("Failed to copy content");
-  
-  dumpfile
-}
-
-fn extract(temp: File, out: String) {
-      let mut zip = zip::ZipArchive::new(temp).unwrap();
-
-    // Extract files inside folder
-    zip
-      .extract(out)
-      .expect("Couldn't extract zip file...");
-
-}
-
-pub async fn bootstrap() {
-  let link = download_link(DOWNLOAD_LOCATION).await;
-  
-  for file in link.assets {
-    let chunk = download(file.browser_download_url).await;
-    extract(chunk, file.name.replace(".zip", ""));
-  }
-  
-  println!("Assets has been updated successfully!")
+        if !path.exists() {
+            std::fs::write(link.as_str(), file.1)
+                .unwrap_or_else(|_| panic!("Unable to write file at {}", link));
+        } else {
+            println!("The directory exists!");
+        }
+    }
+    println!("Assets has been updated successfully!");
+    
+    println!("Dictionaries have been successfully generated!");
+    println!("Make sure to move generated contents to: {}", LOCATION);
+    println!("You can do that by: cp ./dictionary/* {}", LOCATION);
 }

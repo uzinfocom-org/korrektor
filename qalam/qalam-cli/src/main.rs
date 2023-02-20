@@ -1,13 +1,11 @@
+mod data;
 mod env;
 mod skin;
-mod data;
+mod statics;
 
-use std::io::Write;
-use crate::env::env_create;
+use crate::statics::{FIGLET, TUTORIAL};
 use clap::{Parser, Subcommand};
-
-const FIGLET: &str = include_str!("./figlet");
-const TUTORIAL: &str = include_str!("./tutorial.md");
+use std::io::Write;
 
 /// Qalam rest api service made for Korrektor API.
 #[derive(Debug, Parser)]
@@ -28,7 +26,7 @@ enum Commands {
 
     /// Starting the rest server
     Server,
-    
+
     /// Install and unzip latest hunspell dictionary
     Data,
 }
@@ -54,7 +52,7 @@ async fn main() {
             match std::path::Path::new("./.env").exists() {
                 true => {
                     print!("Found .env file, would you like to reset existing one? [y/N] ");
-                    
+
                     // IO stdin catch
                     std::io::stdout().flush().unwrap();
                     let mut input = String::new();
@@ -65,10 +63,10 @@ async fn main() {
 
                     // Remove trailing new line
                     env::trim_newline(&mut input);
-                    
+
                     match input.as_str() {
                         "Y" | "y" => {
-                            println!("Ok, existing env file will be resetted.");
+                            println!("Ok, existing env file will be reset.");
                             env::env_create();
                         }
                         "N" | "n" => {
@@ -79,7 +77,7 @@ async fn main() {
                         }
                     }
                 }
-                false => env_create(),
+                false => env::env_create(),
             }
         }
         Commands::Tutorial => {
@@ -88,9 +86,7 @@ async fn main() {
             help.print_inline(TUTORIAL);
         }
         Commands::Data => {
-            data::bootstrap().await;
-            
-            println!("Still WIP");
+            data::bootstrap();
         }
     }
 }

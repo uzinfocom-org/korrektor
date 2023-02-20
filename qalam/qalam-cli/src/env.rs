@@ -1,4 +1,4 @@
-pub const ENV: &str = include_str!("./sample.env");
+use crate::statics::ENV;
 
 pub fn env_create() {
     std::fs::write("./.env", ENV).expect("Couldn't write .env file");

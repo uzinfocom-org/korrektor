@@ -1,3 +1,6 @@
 [submodule "modules/korrektor-rs-private"]
 	path = modules/korrektor-rs-private
 	url = git@github.com:uzinfocom-org/korrektor-rs-private.git
+[submodule "modules/korrektor-dict"]
+	path = modules/korrektor-dict
+	url = git@github.com:uzinfocom-org/korrektor-dict.git
