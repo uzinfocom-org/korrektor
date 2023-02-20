@@ -4,7 +4,7 @@
   "description": "Backend service for korrektor",
   "private": true,
   "scripts": {
-    "dev": "cargo run --bin qalam-http",
+    "dev": "cargo run --bin qalam-cli",
     "build": "cargo build --release",
     "start": "cargo build --release && ./target/release/qalam-http",
     "lint": "cargo clippy --verbose"

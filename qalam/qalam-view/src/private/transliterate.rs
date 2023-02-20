@@ -10,7 +10,11 @@ pub async fn main() -> HttpResponse {
 }
 
 #[post("/transliterate/{lang}")]
-pub async fn content(path: web::Path<String>, content: web::Bytes, auth: BearerAuth) -> HttpResponse {
+pub async fn content(
+    path: web::Path<String>,
+    content: web::Bytes,
+    auth: BearerAuth,
+) -> HttpResponse {
     let language = path.into_inner();
     let content = match String::from_utf8(content.to_vec()) {
         Ok(string) => string,
@@ -35,8 +39,8 @@ pub async fn content(path: web::Path<String>, content: web::Bytes, auth: BearerA
 
 #[cfg(test)]
 mod tests {
-    use korrektor_rs_private::transliterator;
     use super::*;
+    use korrektor_rs_private::transliterator;
 
     #[actix_web::test]
     async fn content_lat_test() {
@@ -44,11 +48,10 @@ mod tests {
         let process = transliterator::to(text_content.to_string(), "lat");
 
         let response = json!({
-        "message": "private/correct/transliterate",
-        "query": text_content,
-        "content": process
-    });
-
+            "message": "private/correct/transliterate",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"g‘ozal GʼOZAL Gʼozal geliy\",\"message\":\"private/correct/transliterate\",\"query\":\"ғозал ҒОЗАЛ Ғозал гелий\"}";
@@ -62,11 +65,10 @@ mod tests {
         let process = transliterator::to(text_content.to_string(), "cyr");
 
         let response = json!({
-        "message": "private/correct/transliterate",
-        "query": text_content,
-        "content": process
-    });
-
+            "message": "private/correct/transliterate",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"ғозал ҒОЗАЛ Ғозал гелий\",\"message\":\"private/correct/transliterate\",\"query\":\"g'ozal G'OZAL G'ozal geliy\"}";

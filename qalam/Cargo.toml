@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+    "qalam-cli",
     "qalam-db",
     "qalam-http",
     "qalam-view"

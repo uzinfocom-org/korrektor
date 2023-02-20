@@ -37,10 +37,10 @@ mod tests {
         let process = frequency::count(text_content);
 
         let response = json!({
-        "message": "utils/duplicate",
-        "query": text_content,
-        "content": process
-    });
+            "message": "utils/duplicate",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":{\"hello\":2,\"sam\":1},\"message\":\"utils/duplicate\",\"query\":\"hello sam hello\"}";

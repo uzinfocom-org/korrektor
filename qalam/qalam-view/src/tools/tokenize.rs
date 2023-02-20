@@ -42,11 +42,10 @@ mod tests {
         let process = tokenize::split_text(text_content);
 
         let response = json!({
-        "message": "tools/tokenize",
-        "query": text_content,
-        "content": process
-    });
-
+            "message": "tools/tokenize",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"si-ngil chi-roy-li чи-рой-ли\",\"message\":\"tools/tokenize\",\"query\":\"singil chiroyli чиройли\"}";

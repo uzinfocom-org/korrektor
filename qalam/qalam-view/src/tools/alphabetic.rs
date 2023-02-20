@@ -42,11 +42,10 @@ mod tests {
         let process = alphabetic::sort(text_content);
 
         let response = json!({
-        "message": "tools/alphabetic",
-        "query": text_content,
-        "content": process
-    });
-
+            "message": "tools/alphabetic",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"estafeta o‘zbek chilonzor chiroyli G‘ozal\",\"message\":\"tools/alphabetic\",\"query\":\"G‘ozal estafeta chilonzor o'zbek chiroyli\"}";

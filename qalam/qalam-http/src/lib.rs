@@ -11,8 +11,7 @@ pub mod init;
 static PEAK_ALLOC: PeakAlloc = PeakAlloc;
 static VERSION: &str = concat!(env!("CARGO_PKG_VERSION"));
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
+pub async fn server() -> std::io::Result<()> {
     // Initializing logger & envs
     init::initialize().await;
 
@@ -25,7 +24,7 @@ async fn main() -> std::io::Result<()> {
     // Logging the outlet of the server
     let configs: (String, u16) = init::target();
     println!(
-        "ready - started server on {address}:{port}, url: https://{address}:{port}",
+        "ready - started server on {address}:{port}, url: http://{address}:{port}",
         address = configs.0,
         port = configs.1
     );
@@ -51,7 +50,7 @@ async fn main() -> std::io::Result<()> {
                     .service(private::correct::syntax)
                     // Transliterate
                     .service(private::transliterate::main)
-                    .service(private::transliterate::content)
+                    .service(private::transliterate::content),
             )
             .service(
                 web::scope("/tools")
@@ -80,6 +79,7 @@ async fn main() -> std::io::Result<()> {
             )
             .default_service(web::route().to(error::index))
     })
+    .workers(std::env::var("THREADS").unwrap().parse().unwrap())
     .bind((configs.0, configs.1))?
     .run()
     .await

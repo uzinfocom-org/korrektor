@@ -37,10 +37,10 @@ mod tests {
         let process = duplicates::remove(text_content);
 
         let response = json!({
-        "message": "utils/duplicate",
-        "query": text_content,
-        "content": process
-    });
+            "message": "utils/duplicate",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"hello sam\",\"message\":\"utils/duplicate\",\"query\":\"hello sam hello\"}";

@@ -10,8 +10,12 @@ pub async fn main() -> HttpResponse {
 }
 
 #[post("/correct/content/{lang}")]
-pub async fn content(path: web::Path<String>, content: web::Bytes, auth: BearerAuth) -> HttpResponse {
-    let language= path.into_inner();
+pub async fn content(
+    path: web::Path<String>,
+    content: web::Bytes,
+    auth: BearerAuth,
+) -> HttpResponse {
+    let language = path.into_inner();
 
     let content = match String::from_utf8(content.to_vec()) {
         Ok(string) => string,
@@ -82,8 +86,8 @@ pub async fn syntax(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
 
 #[cfg(test)]
 mod tests {
-    use korrektor_rs_private::corrector;
     use super::*;
+    use korrektor_rs_private::corrector;
 
     #[actix_web::test]
     async fn content_lat_test() {
@@ -91,27 +95,27 @@ mod tests {
         let process_lat = corrector::get_correction_suggestions(text_content_lat, "lat");
 
         let response = json!({
-        "message": "private/correct/content",
-        "query": text_content_lat,
-        "content": process_lat
-    });
+            "message": "private/correct/content",
+            "query": text_content_lat,
+            "content": process_lat
+        });
 
         let errors_lat = json!({
-                "misspelled": "chroyli",
-                "position": 0,
-                "suggestions": [
-                    "choyli".to_string(),
-                    "chiroyli".to_string(),
-                    "chorpoyli".to_string(),
-                    "choroynali".to_string(),
-                    "choykorli".to_string(),
-                    "chiroyi".to_string(),
-                    "zichroqli".to_string()]
-            });
+            "misspelled": "chroyli",
+            "position": 0,
+            "suggestions": [
+                "choyli".to_string(),
+                "chiroyli".to_string(),
+                "chorpoyli".to_string(),
+                "choroynali".to_string(),
+                "choykorli".to_string(),
+                "chiroyi".to_string(),
+                "zichroqli".to_string()]
+        });
 
-
-        let static_json =
-            "{\"content\":[".to_string() + &serde_json::to_string(&errors_lat).unwrap() + "],\"message\":\"private/correct/content\",\"query\":\"chroyli\"}";
+        let static_json = "{\"content\":[".to_string()
+            + &serde_json::to_string(&errors_lat).unwrap()
+            + "],\"message\":\"private/correct/content\",\"query\":\"chroyli\"}";
 
         assert_eq!(&serde_json::to_string(&response).unwrap(), &static_json);
     }
@@ -122,26 +126,27 @@ mod tests {
         let process_cyr = corrector::get_correction_suggestions(text_content_cyr, "cyr");
 
         let response = json!({
-        "message": "private/correct/content",
-        "query": text_content_cyr,
-        "content": process_cyr
-    });
+            "message": "private/correct/content",
+            "query": text_content_cyr,
+            "content": process_cyr
+        });
 
         let errors_cyr = json!({
-                "misspelled": "чройли",
-                "position": 0,
-                "suggestions": [
-                    "чойли".to_string(),
-                    "чиройли".to_string(),
-                    "чорпойли".to_string(),
-                    "ойлили".to_string(),
-                    "ойликчи".to_string(),
-                    "чоройнали".to_string(),
-                    "бройлерли".to_string()]
-            });
+            "misspelled": "чройли",
+            "position": 0,
+            "suggestions": [
+                "чойли".to_string(),
+                "чиройли".to_string(),
+                "чорпойли".to_string(),
+                "ойлили".to_string(),
+                "ойликчи".to_string(),
+                "чоройнали".to_string(),
+                "бройлерли".to_string()]
+        });
 
-        let static_json =
-            "{\"content\":[".to_string() + &serde_json::to_string(&errors_cyr).unwrap() + "],\"message\":\"private/correct/content\",\"query\":\"чройли\"}";
+        let static_json = "{\"content\":[".to_string()
+            + &serde_json::to_string(&errors_cyr).unwrap()
+            + "],\"message\":\"private/correct/content\",\"query\":\"чройли\"}";
 
         assert_eq!(&serde_json::to_string(&response).unwrap(), &static_json);
     }
@@ -152,11 +157,10 @@ mod tests {
         let process = corrector::remove_modifiers(text_content);
 
         let response = json!({
-        "message": "private/correct/modifiers",
-        "query": text_content,
-        "content": process
-    });
-
+            "message": "private/correct/modifiers",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"stul  stul\",\"message\":\"private/correct/modifiers\",\"query\":\"stul- stul-ku\"}";
@@ -170,11 +174,10 @@ mod tests {
         let process = corrector::correct(text_content);
 
         let response = json!({
-        "message": "private/correct/syntax",
-        "query": text_content,
-        "content": process
-    });
-
+            "message": "private/correct/syntax",
+            "query": text_content,
+            "content": process
+        });
 
         let static_json =
             "{\"content\":\"2022 йил 12-yanvar go‘zal\",\"message\":\"private/correct/syntax\",\"query\":\"2022-йил 12 yanvar go'zal\"}";
