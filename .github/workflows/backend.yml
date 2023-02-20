@@ -18,7 +18,10 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Build
-        run: cargo build --release --verbose
+        run: |
+            cargo build --release --verbose
+            # Tell the size of binary
+            pwd # du -s 
 
       - name: Run lint
         run: cargo clippy --verbose
