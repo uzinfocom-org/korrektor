@@ -37,7 +37,7 @@ pub fn env_check() {
             env_map(vec![
                 ("ISDEV", "yes"),
                 ("HOST", "127.0.0.1"),
-                ("PORT", "3001"),
+                ("PORT", "8083"),
                 ("THREADS", "1"),
             ]);
         }
