@@ -1,7 +1,6 @@
 use actix_files as fs;
 use actix_web::http::header::{ContentDisposition, DispositionType};
 use actix_web::{get, Error, HttpResponse, Responder};
-use serde_json::json;
 
 pub mod auth;
 pub mod error;
