@@ -12,11 +12,17 @@ pub mod utils;
 
 #[get("/")]
 pub async fn index() -> impl Responder {
-    HttpResponse::Ok().json(json!(
-            {
-                "message": "welcome to korrektor's backend, check the api health /status"
-            }
-    ))
+    // Send sample json response
+    // HttpResponse::Ok().json(json!(
+    //         {
+    //             "message": "welcome to korrektor's backend, check the api health /status"
+    //         }
+    // ))
+  
+    // Respond with a redirect
+    HttpResponse::Found()
+    .append_header(("Location", "https://docs.korrektor.uz"))
+    .finish()
 }
 
 #[get("/favicon.ico")]
