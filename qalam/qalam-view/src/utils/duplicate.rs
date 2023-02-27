@@ -4,7 +4,10 @@ use serde_json::json;
 
 #[get("/duplicate")]
 pub async fn main() -> HttpResponse {
-    HttpResponse::Ok().body("Duplicates module")
+    HttpResponse::Ok().json(json!({
+        "endpoint": "/duplicate",
+        "docs": "https://docs.korrektor.uz/duplicate"
+    }))
 }
 
 #[post("/duplicate")]

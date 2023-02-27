@@ -6,7 +6,10 @@ use serde_json::json;
 
 #[get("/tokenize")]
 pub async fn main() -> HttpResponse {
-    HttpResponse::Ok().body("Tokenize module")
+    HttpResponse::Ok().json(json!({
+        "endpoint": "/tokenize",
+        "docs": "https://docs.korrektor.uz/tokenize"
+    }))
 }
 
 #[post("/tokenize")]

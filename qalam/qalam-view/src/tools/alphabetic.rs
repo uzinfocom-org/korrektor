@@ -6,7 +6,10 @@ use serde_json::json;
 
 #[get("/alphabetic")]
 pub async fn main() -> HttpResponse {
-    HttpResponse::Ok().body("Alphabetic ordering module")
+    HttpResponse::Ok().json(json!({
+        "endpoint": "/alphabetic",
+        "docs": "https://docs.korrektor.uz/alphabetic"
+    }))
 }
 
 #[post("/alphabetic")]

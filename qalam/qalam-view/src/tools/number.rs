@@ -6,7 +6,10 @@ use serde_json::json;
 
 #[get("/number")]
 pub async fn main() -> HttpResponse {
-    HttpResponse::Ok().body("Number module")
+    HttpResponse::Ok().json(json!({
+        "endpoint": "/number",
+        "docs": "https://docs.korrektor.uz/number"
+    }))
 }
 
 #[post("/number")]

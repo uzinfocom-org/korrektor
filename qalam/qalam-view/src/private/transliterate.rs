@@ -6,7 +6,10 @@ use serde_json::json;
 
 #[get("/transliterate")]
 pub async fn main() -> HttpResponse {
-    HttpResponse::Ok().body("Transliteration module")
+    HttpResponse::Ok().json(json!({
+        "endpoint": "/transliterate",
+        "docs": "https://docs.korrektor.uz/transliterate"
+    }))
 }
 
 #[post("/transliterate/{lang}")]

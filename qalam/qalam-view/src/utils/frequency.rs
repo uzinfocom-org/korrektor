@@ -4,7 +4,10 @@ use serde_json::json;
 
 #[get("/frequency")]
 pub async fn main() -> HttpResponse {
-    HttpResponse::Ok().body("Frequency module")
+    HttpResponse::Ok().json(json!({
+        "endpoint": "/frequency",
+        "docs": "https://docs.korrektor.uz/frequency"
+    }))
 }
 
 #[post("/frequency")]
