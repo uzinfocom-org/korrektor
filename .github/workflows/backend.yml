@@ -17,11 +17,14 @@ jobs:
           submodules: recursive
           token: ${{ secrets.PAT_TOKEN }}
 
+      - name: Install spell checkers
+        run: sudo apt -y install hunspell ispell aspell
+
+      - name: Install vocabularies
+        run: sudo rm -rf /usr/share/hunspell && sudo cp -R ./modules/korrektor-dict/src /usr/share/hunspell
+
       - name: Build
-        run: |
-            cargo build --release --verbose
-            # Tell the size of binary
-            du -s ./target/release/qalam-cli
+        run: cargo build --release --verbose
 
       - name: Run lint
         run: cargo clippy --verbose
