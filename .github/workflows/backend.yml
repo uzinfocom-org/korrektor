@@ -23,7 +23,6 @@ jobs:
       - name: Install vocabularies
         run: |
             sudo rm -rf /usr/share/hunspell
-            ls -la
             sudo cp -R ../modules/korrektor-dict/src /usr/share/hunspell
 
       - name: Build
