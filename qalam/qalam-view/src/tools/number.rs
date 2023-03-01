@@ -3,6 +3,7 @@ use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::number;
 use serde_json::json;
+use crate::request::Request;
 
 #[get("/number")]
 pub async fn main() -> HttpResponse {
@@ -13,17 +14,10 @@ pub async fn main() -> HttpResponse {
 }
 
 #[post("/number")]
-pub async fn content(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
-    let content = match String::from_utf8(path.to_vec()) {
-        Ok(string) => string,
-        Err(_) => {
-            return HttpResponse::BadRequest().json(json!({
-                "message": "tools/number",
-                "content": "Invalid input in body: should be text with valid characters."}));
-        }
-    };
+pub async fn content(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
+    let content_string= body.into_inner().content;
 
-    let content: i64 = match content.trim().parse() {
+    let content: i64 = match content_string.trim().parse() {
         Ok(num) => num,
         Err(_) => {
             return HttpResponse::BadRequest().json(json!({
@@ -37,7 +31,7 @@ pub async fn content(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
     middleware(
         HttpResponse::Ok().json(json!({
             "message": "tools/number",
-            "query": content,
+            "query": content_string,
             "content": process
         })),
         auth,

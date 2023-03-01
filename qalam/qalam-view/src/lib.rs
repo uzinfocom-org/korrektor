@@ -5,6 +5,7 @@ use actix_web::{get, Error, HttpResponse, Responder};
 pub mod auth;
 pub mod error;
 pub mod private;
+pub mod request;
 pub mod stats;
 pub mod tools;
 pub mod utils;

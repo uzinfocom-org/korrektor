@@ -1,6 +1,7 @@
 use actix_web::{get, post, web, HttpResponse};
 use korrektor::utils::frequency;
 use serde_json::json;
+use crate::request::Request;
 
 #[get("/frequency")]
 pub async fn main() -> HttpResponse {
@@ -11,15 +12,8 @@ pub async fn main() -> HttpResponse {
 }
 
 #[post("/frequency")]
-pub async fn content(path: web::Bytes) -> HttpResponse {
-    let content = match String::from_utf8(path.to_vec()) {
-        Ok(string) => string,
-        Err(_) => {
-            return HttpResponse::BadRequest().json(json!({
-                "message": "utils/frequency",
-                "content": "Invalid input in body: should be text with valid characters."}));
-        }
-    };
+pub async fn content(body: web::Json<Request>) -> HttpResponse {
+    let content = body.into_inner().content;
 
     let process = frequency::count(content.as_str());
 

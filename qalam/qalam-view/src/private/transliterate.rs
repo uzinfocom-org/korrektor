@@ -3,6 +3,7 @@ use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor_rs_private;
 use serde_json::json;
+use crate::request::Request;
 
 #[get("/transliterate")]
 pub async fn main() -> HttpResponse {
@@ -15,18 +16,11 @@ pub async fn main() -> HttpResponse {
 #[post("/transliterate/{lang}")]
 pub async fn content(
     path: web::Path<String>,
-    content: web::Bytes,
+    body: web::Json<Request>,
     auth: BearerAuth,
 ) -> HttpResponse {
     let language = path.into_inner();
-    let content = match String::from_utf8(content.to_vec()) {
-        Ok(string) => string,
-        Err(_) => {
-            return HttpResponse::BadRequest().json(json!({
-                "message": "private/transliterate",
-                "content": "Invalid input in body: should be text with valid characters."}));
-        }
-    };
+    let content= body.into_inner().content;
 
     let process = korrektor_rs_private::transliterator::to(content.clone(), &language);
 

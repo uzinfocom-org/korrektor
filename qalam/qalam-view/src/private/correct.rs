@@ -3,6 +3,7 @@ use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor_rs_private;
 use serde_json::json;
+use crate::request::Request;
 
 #[get("/correct")]
 pub async fn main() -> HttpResponse {
@@ -15,19 +16,12 @@ pub async fn main() -> HttpResponse {
 #[post("/correct/content/{lang}")]
 pub async fn content(
     path: web::Path<String>,
-    content: web::Bytes,
+    body: web::Json<Request>,
     auth: BearerAuth,
 ) -> HttpResponse {
     let language = path.into_inner();
 
-    let content = match String::from_utf8(content.to_vec()) {
-        Ok(string) => string,
-        Err(_) => {
-            return HttpResponse::BadRequest().json(json!({
-                "message": "private/correct/content",
-                "content": "Invalid input in body: should be text with valid characters."}));
-        }
-    };
+    let content= body.into_inner().content;
 
     let process = korrektor_rs_private::corrector::get_correction_suggestions(&content, &language);
 
@@ -42,15 +36,8 @@ pub async fn content(
 }
 
 #[post("/correct/modifiers")]
-pub async fn modifiers(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
-    let text_content = match String::from_utf8(path.to_vec()) {
-        Ok(string) => string,
-        Err(_) => {
-            return HttpResponse::BadRequest().json(json!({
-                "message": "private/correct/modifiers",
-                "content": "Invalid input in body: should be text with valid characters."}));
-        }
-    };
+pub async fn modifiers(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
+    let text_content= body.into_inner().content;
 
     let process = korrektor_rs_private::corrector::remove_modifiers(&text_content);
 
@@ -65,15 +52,8 @@ pub async fn modifiers(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
 }
 
 #[post("/correct/syntax")]
-pub async fn syntax(path: web::Bytes, auth: BearerAuth) -> HttpResponse {
-    let text_content = match String::from_utf8(path.to_vec()) {
-        Ok(string) => string,
-        Err(_) => {
-            return HttpResponse::BadRequest().json(json!({
-                "message": "private/correct/syntax",
-                "content": "Invalid input in body: should be text with valid characters."}));
-        }
-    };
+pub async fn syntax(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
+    let text_content= body.into_inner().content;
 
     let process = korrektor_rs_private::corrector::correct(&text_content);
 
