@@ -36,7 +36,7 @@ pub fn bootstrap() {
         }
     }
     println!("Assets has been updated successfully!");
-    
+
     println!("Dictionaries have been successfully generated!");
     println!("Make sure to move generated contents to: {}", LOCATION);
     println!("You can do that by: cp ./dictionary/* {}", LOCATION);

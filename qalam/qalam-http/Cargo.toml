@@ -12,4 +12,5 @@ peak_alloc = "0.1.0"
 env_logger = "0.10.0"
 actix-web-httpauth = "0.8.0"
 qalam-view = { path = "../qalam-view" }
+actix-cors = "0.6.4"
 

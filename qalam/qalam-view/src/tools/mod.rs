@@ -1,5 +1,5 @@
-use serde_json::json;
 use actix_web::{get, HttpResponse};
+use serde_json::json;
 
 pub mod alphabetic;
 pub mod number;
@@ -24,5 +24,4 @@ pub async fn index() -> HttpResponse {
             }
         ]
     }))
-    
 }

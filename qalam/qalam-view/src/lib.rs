@@ -17,11 +17,11 @@ pub async fn index() -> impl Responder {
     //             "message": "welcome to korrektor's backend, check the api health /status"
     //         }
     // ))
-  
+
     // Respond with a redirect
     HttpResponse::Found()
-    .append_header(("Location", "https://docs.korrektor.uz"))
-    .finish()
+        .append_header(("Location", "https://docs.korrektor.uz"))
+        .finish()
 }
 
 #[get("/favicon.ico")]

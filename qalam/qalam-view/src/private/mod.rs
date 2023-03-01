@@ -1,5 +1,5 @@
-use serde_json::json;
 use actix_web::{get, HttpResponse};
+use serde_json::json;
 
 pub mod correct;
 pub mod transliterate;
