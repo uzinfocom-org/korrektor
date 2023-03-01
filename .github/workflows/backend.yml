@@ -24,7 +24,7 @@ jobs:
         run: |
             sudo rm -rf /usr/share/hunspell
             ls -la
-            sudo cp -R ./modules/korrektor-dict/src /usr/share/hunspell
+            sudo cp -R ../modules/korrektor-dict/src /usr/share/hunspell
 
       - name: Build
         run: cargo build --release --verbose
