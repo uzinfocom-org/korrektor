@@ -1233,10 +1233,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "qalam-db"
-version = "1.0.0"
-
-[[package]]
 name = "qalam-http"
 version = "1.0.0"
 dependencies = [
