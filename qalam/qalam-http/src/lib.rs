@@ -1,4 +1,3 @@
-use actix_cors::Cors;
 use actix_web::middleware::TrailingSlash;
 use actix_web::{middleware, web, App, HttpServer};
 use actix_web_httpauth::extractors::bearer::{self};
@@ -35,13 +34,13 @@ pub async fn server() -> std::io::Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .wrap(middleware::NormalizePath::new(TrailingSlash::Trim))
-            .wrap(
-                Cors::default()
-                    .supports_credentials()
-                    .allow_any_header()
-                    .allow_any_origin()
-                    .allow_any_method(),
-            )
+            // .wrap(
+            //     Cors::default()
+            //         .supports_credentials()
+            //         .allow_any_header()
+            //         .allow_any_origin()
+            //         .allow_any_method(),
+            // )
             .app_data(web::Data::new(status.clone()))
             .app_data(bearer::Config::default().realm("Restricted area: Dungeon Masters only"))
             .service(index)
