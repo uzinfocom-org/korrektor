@@ -9,7 +9,7 @@ use std::io::Write;
 
 /// Qalam rest api service made for Korrektor API.
 #[derive(Debug, Parser)]
-#[clap(name = "qalam")]
+#[clap(name = "qalam", version)]
 #[clap(about = "Qalam rest api service made for Korrektor API.", long_about = None)]
 pub struct Cli {
     #[clap(subcommand)]

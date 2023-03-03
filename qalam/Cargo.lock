@@ -1222,8 +1222,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "qalam-cli"
-version = "0.1.0"
+name = "qalam"
+version = "1.0.0"
 dependencies = [
  "actix-web",
  "clap",
@@ -1234,11 +1234,11 @@ dependencies = [
 
 [[package]]
 name = "qalam-db"
-version = "0.1.0"
+version = "1.0.0"
 
 [[package]]
 name = "qalam-http"
-version = "0.2.0"
+version = "1.0.0"
 dependencies = [
  "actix-cors",
  "actix-web",
@@ -1251,7 +1251,7 @@ dependencies = [
 
 [[package]]
 name = "qalam-view"
-version = "0.2.0"
+version = "1.0.0"
 dependencies = [
  "actix-files",
  "actix-web",

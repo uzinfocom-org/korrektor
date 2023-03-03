@@ -1,7 +1,15 @@
 [package]
-name = "qalam-cli"
-version = "0.1.0"
+name = "qalam"
+version = "1.0.0"
 edition = "2021"
+homepage = "https://api.korrektor.uz"
+documentation = "https://docs.korrektor.uz"
+repository = "https://github.com/uzinfocom-org/korrektor"
+description = "Qalam REST API for Uzbek language"
+authors = ["Uzinfocom Open Source <cctld@uzinfocom.uz>"]
+keywords = ["korrektor", "qalam", "uzbek"]
+readme = "readme.md"
+license = "GPL-3.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
