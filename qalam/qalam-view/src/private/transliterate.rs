@@ -1,9 +1,9 @@
 use crate::auth::middleware;
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor_rs_private;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/transliterate")]
 pub async fn main() -> HttpResponse {
@@ -20,7 +20,7 @@ pub async fn content(
     auth: BearerAuth,
 ) -> HttpResponse {
     let language = path.into_inner();
-    let content= body.into_inner().content;
+    let content = body.into_inner().content;
 
     let process = korrektor_rs_private::transliterator::to(content.clone(), &language);
 

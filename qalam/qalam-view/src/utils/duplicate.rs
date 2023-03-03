@@ -1,7 +1,7 @@
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use korrektor::utils::duplicates;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/duplicate")]
 pub async fn main() -> HttpResponse {
@@ -13,7 +13,7 @@ pub async fn main() -> HttpResponse {
 
 #[post("/duplicate")]
 pub async fn content(body: web::Json<Request>) -> HttpResponse {
-    let content= body.into_inner().content;
+    let content = body.into_inner().content;
 
     let process = duplicates::remove(&content);
 

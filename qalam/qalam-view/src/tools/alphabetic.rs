@@ -1,9 +1,9 @@
 use crate::auth::middleware;
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::alphabetic;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/alphabetic")]
 pub async fn main() -> HttpResponse {
@@ -15,7 +15,7 @@ pub async fn main() -> HttpResponse {
 
 #[post("/alphabetic")]
 pub async fn content(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
-    let content= body.into_inner().content;
+    let content = body.into_inner().content;
 
     let process = alphabetic::sort(content.as_str());
 

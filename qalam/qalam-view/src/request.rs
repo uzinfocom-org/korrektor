@@ -2,5 +2,5 @@ use serde::Deserialize;
 
 #[derive(Deserialize)]
 pub struct Request {
-    pub content: String
+    pub content: String,
 }

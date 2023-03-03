@@ -1,9 +1,9 @@
 use crate::auth::middleware;
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::tokenize;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/tokenize")]
 pub async fn main() -> HttpResponse {
@@ -15,7 +15,7 @@ pub async fn main() -> HttpResponse {
 
 #[post("/tokenize")]
 pub async fn content(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
-    let content= body.into_inner().content;
+    let content = body.into_inner().content;
 
     let process = tokenize::split_text(content.as_str());
 

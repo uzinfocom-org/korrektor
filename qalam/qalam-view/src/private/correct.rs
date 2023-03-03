@@ -1,9 +1,9 @@
 use crate::auth::middleware;
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor_rs_private;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/correct")]
 pub async fn main() -> HttpResponse {
@@ -21,7 +21,7 @@ pub async fn content(
 ) -> HttpResponse {
     let language = path.into_inner();
 
-    let content= body.into_inner().content;
+    let content = body.into_inner().content;
 
     let process = korrektor_rs_private::corrector::get_correction_suggestions(&content, &language);
 
@@ -37,7 +37,7 @@ pub async fn content(
 
 #[post("/correct/modifiers")]
 pub async fn modifiers(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
-    let text_content= body.into_inner().content;
+    let text_content = body.into_inner().content;
 
     let process = korrektor_rs_private::corrector::remove_modifiers(&text_content);
 
@@ -53,7 +53,7 @@ pub async fn modifiers(body: web::Json<Request>, auth: BearerAuth) -> HttpRespon
 
 #[post("/correct/syntax")]
 pub async fn syntax(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
-    let text_content= body.into_inner().content;
+    let text_content = body.into_inner().content;
 
     let process = korrektor_rs_private::corrector::correct(&text_content);
 

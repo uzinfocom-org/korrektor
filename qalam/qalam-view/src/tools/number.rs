@@ -1,9 +1,9 @@
 use crate::auth::middleware;
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use actix_web_httpauth::extractors::bearer::BearerAuth;
 use korrektor::uzbek::number;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/number")]
 pub async fn main() -> HttpResponse {
@@ -15,7 +15,7 @@ pub async fn main() -> HttpResponse {
 
 #[post("/number")]
 pub async fn content(body: web::Json<Request>, auth: BearerAuth) -> HttpResponse {
-    let content_string= body.into_inner().content;
+    let content_string = body.into_inner().content;
 
     let content: i64 = match content_string.trim().parse() {
         Ok(num) => num,

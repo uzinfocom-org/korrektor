@@ -1,7 +1,7 @@
+use crate::request::Request;
 use actix_web::{get, post, web, HttpResponse};
 use korrektor::utils::frequency;
 use serde_json::json;
-use crate::request::Request;
 
 #[get("/frequency")]
 pub async fn main() -> HttpResponse {
